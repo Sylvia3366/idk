@@ -15,16 +15,16 @@ There are three difficulties consisting of pitches ranging from C3 (~131Hz) to C
 
 # HOW TO PLAY
 When starting the game, it will ask you to choose a difficulty level. Use the red button to toggle between the three difficulties. 
-D1: range c3 to c5, 6 seconds, demo plays 2 times
-D2: range c3 to c6, 6 seconds, demo plays 1 time
-D3: range c3 to c7, 3 seconds, demo plays 1 time
+- D1: range c3 to c5, 6 seconds, demo plays 2 times
+- D2: range c3 to c6, 6 seconds, demo plays 1 time
+- D3: range c3 to c7, 3 seconds, demo plays 1 time
 
 After selecting a difficulty, press the submit button (black) to confirm. The game will start with a 3 second countdown before the demo note plays. After the note finishes playing, you can start adjusting the potentiometer to try and match the demo note. The coundown LEDs will display a timer. 
 
 Once you're sure of a choice, click the black button again to submit. A result LED will light up depending on how well you did.
-Blue: 15 allowed error
-Green: 50 allowed error
-Yellow: 150 allowed error
-Red: Over 150 away from answer
+- Blue: 15 allowed error
+- Green: 50 allowed error
+- Yellow: 150 allowed error
+- Red: Over 150 away from answer
 
 At anytime during selection, hold the red button for 1 second to reselect the difficulty level.
