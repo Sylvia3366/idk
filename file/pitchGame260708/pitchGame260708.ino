@@ -4,21 +4,22 @@ const int btnDiff = 4;
 const int buzzerPin = 9;
 const int ledBlue = 13, ledGreen = 12, ledYellow = 11, ledRed = 10;
 const int cd1 = 6, cd2 = 7, cd3 = 8;
-const int progLed = 5;
+const int life1 = 1, life2 = 3, life3 = 5;
 
 //global
 int targetPitch;
 bool gameActive = true;
 int difficulty = 1; //diff
 unsigned long guessingStartTime = 0;
-int p = 50;
 bool selecting = true;
 int temp;
 unsigned long pressStartTime = 0;
 bool isPressing = false;
+int life = 2;
 
 void setup() {
   pinMode(btnPin, INPUT_PULLUP);
+  pinMode(btnDiff, INPUT_PULLUP);
   pinMode(ledBlue, OUTPUT);
   pinMode(ledGreen, OUTPUT);
   pinMode(ledYellow, OUTPUT);
@@ -26,11 +27,13 @@ void setup() {
   pinMode(cd1, OUTPUT);
   pinMode(cd2, OUTPUT);
   pinMode(cd3, OUTPUT);
-  pinMode(progLed, OUTPUT);
+  pinMode(life1, OUTPUT);
+  pinMode(life2, OUTPUT);
+  pinMode(life3, OUTPUT);
   
-  analogWrite(progLed, p);
   randomSeed(analogRead(0));
   selectDifficulty();
+  refreshLives();
   startNewRound();
 }
 
@@ -55,6 +58,39 @@ void selectDifficulty() {
       delay(500);
       clearLEDs();
     }
+  }
+}
+
+void refreshLives() {
+  // Keep lives within 0 and 3
+  life = constrain(life, 0, 3);
+  
+  // Turn pins on/off based on the 'life' variable
+  digitalWrite(life1, (life >= 1) ? HIGH : LOW);
+  digitalWrite(life2, (life >= 2) ? HIGH : LOW);
+  digitalWrite(life3, (life >= 3) ? HIGH : LOW);
+
+  // If lives hit 0, handle game over (optional)
+  if (life <= 0) {
+    // Add Game Over logic here (e.g., flash lights, reset to 3)
+    delay(500);
+    tone(buzzerPin,500,200);
+    delay(200);
+    tone(buzzerPin,500,200);
+    delay(200);
+    tone(buzzerPin,500,200);
+    delay(200);
+    tone(buzzerPin,800,150);
+    delay(150);
+    tone(buzzerPin,500,500);
+    delay(500);
+    tone(buzzerPin,600,1000);
+    delay(2000);
+    clearLEDs();
+    selectDifficulty();
+    life = 2;
+    refreshLives();
+    startNewRound();
   }
 }
 
@@ -105,21 +141,16 @@ void startNewRound() {
 
 void loop() {
   if (digitalRead(btnDiff) == LOW) {
-    if (!isPressing) {
-      pressStartTime = millis();
-      isPressing = true;
-    } else if (millis() - pressStartTime >= 1000) {
-      // Held for 1 second! Enter menu.
-      isPressing = false; // Reset state
       noTone(buzzerPin);
       clearLEDs();
+      life = 0;
+      refreshLives();
       selectDifficulty(); // Go back to the menu
+      life = 2;
+      refreshLives();
       startNewRound();    // Restart after menu
       return;             // Exit this loop cycle
-    }
-  } else {
-    isPressing = false; // Reset if they let go
-  }
+  } 
 
   unsigned long currentMillis = millis();
   unsigned long elapsed = currentMillis - guessingStartTime;
@@ -166,20 +197,17 @@ void evaluate(int guess, int target) {
   
   if (diff == 15) {
     digitalWrite(ledBlue, HIGH);
-    p+=30;
+    life++;
   } else if (diff <= 50) {
     digitalWrite(ledGreen, HIGH);
-    p+=15;
   } else if (diff <= 150) {
     digitalWrite(ledYellow, HIGH);
-    p-=15;
+    life--;
   } else {
     digitalWrite(ledRed, HIGH);
-    p-=30;
+    life--;
   }
-
-  p = constrain(p, 0, 255); // Keep range safe
-  analogWrite(progLed, p);   // Update brightness here
+  refreshLives();
 }
 
 void clearLEDs() {
