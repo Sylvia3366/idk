@@ -2,7 +2,7 @@
 Perfect pitch or utterly tone deaf? Find out with the Pitch Player :)!
 
 There are three difficulties consisting of pitches ranging from C3 (~131Hz) to C7 (~2093Hz). Adjust the potentiometer to match that pitch after the buzzer plays a demo. The LEDs will let you know how well you’ve done. 
-<img width="4032" height="3024" alt="pitchgame" src="https://github.com/user-attachments/assets/d49672c8-6ec7-41b0-a315-caeb3287b774" />
+<img width="4032" height="3024" alt="anotherimage" src="https://github.com/user-attachments/assets/89e7746a-6649-4664-bf93-217eb41e9123" />
 
 # FEATURES
 - Arduino UNO R3
