@@ -7,8 +7,8 @@ There are three difficulties consisting of pitches ranging from C3 (~131Hz) to C
 # FEATURES
 - Arduino UNO R3
 - 4 result LEDs (red, yellow, green, blue)
-- 1 progress LED
 - 3 countdown/difficulty LEDs
+- 3 lives LEDs
 - Submit button
 - Difficulty change button
 - Potentiometer
