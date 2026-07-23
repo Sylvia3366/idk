@@ -44,3 +44,15 @@ FEATURES
 - LCD Screen
 - 1 laser button
 
+HOW TO PLAY
+-
+Navigate the setting by steering the ship (>) using the joystick. Press a red button to shoot a laser to destroy astroids.
+
+# P3. DINO JUMP
+An auto dino jump mechanism using LDRs and a servo so you can sit back and watch :)
+
+FEATURES
+-
+- Arduino UNO R3
+- 2 LDRs
+- Servo
